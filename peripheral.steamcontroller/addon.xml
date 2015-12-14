@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon
+  id="peripheral.steamcontroller"
+  version="1.0.0"
+  name="Steam controller driver"
+  provider-name="Team-Kodi">
+  <requires>
+    <c-pluff version="0.1"/>
+    <import addon="kodi.peripheral" version="1.0.15"/>
+  </requires>
+  <extension
+    point="kodi.peripheral"
+    provides_joysticks="true"
+    library_linux="peripheral.steamcontroller.so"
+    library_osx="peripheral.steamcontroller.dylib"
+    library_wingl="peripheral.steamcontroller.dll"
+    library_windx="peripheral.steamcontroller.dll"
+    library_android="libperipheral.steamcontroller.so" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Steam controller driver</summary>
+    <description lang="en">This driver enables input from the Steam controller.</description>
+    <platform>all</platform>
+    <nofanart>true</nofanart>
+  </extension>
+</addon>
