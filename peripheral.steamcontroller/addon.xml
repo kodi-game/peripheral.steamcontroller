@@ -18,9 +18,7 @@
     library_android="libperipheral.steamcontroller.so" />
   <extension point="xbmc.addon.metadata">
     <summary lang="en">Steam controller driver</summary>
-    <description lang="en">This driver enables input from the Steam controller.
-
-Icon credit: ynsta (https://github.com/ynsta)</description>
+    <description lang="en">This driver enables input from the Steam controller.</description>
     <platform>all</platform>
     <nofanart>true</nofanart>
   </extension>
