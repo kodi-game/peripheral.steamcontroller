@@ -130,4 +130,8 @@ PERIPHERAL_ERROR MapFeatures(const JOYSTICK_INFO* joystick, const char* controll
   return PERIPHERAL_ERROR_FAILED;
 }
 
+void ResetButtonMap(const JOYSTICK_INFO* joystick, const char* controller_id)
+{
+}
+
 } // extern "C"
