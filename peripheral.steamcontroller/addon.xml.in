@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="peripheral.steamcontroller"
-  version="1.0.0"
+  version="1.1.0"
   name="Steam controller driver"
   provider-name="Team-Kodi">
   <requires>
@@ -11,15 +11,11 @@
   <extension
     point="kodi.peripheral"
     provides_joysticks="true"
-    library_linux="peripheral.steamcontroller.so"
-    library_osx="peripheral.steamcontroller.dylib"
-    library_wingl="peripheral.steamcontroller.dll"
-    library_windx="peripheral.steamcontroller.dll"
-    library_android="libperipheral.steamcontroller.so" />
+    library_@PLATFORM@="@LIBRARY_FILENAME@"/>
   <extension point="xbmc.addon.metadata">
     <summary lang="en">Steam controller driver</summary>
     <description lang="en">This driver enables input from the Steam controller.</description>
-    <platform>all</platform>
+    <platform>@PLATFORM@</platform>
     <nofanart>true</nofanart>
   </extension>
 </addon>

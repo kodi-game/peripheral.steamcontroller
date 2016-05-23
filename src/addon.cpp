@@ -20,8 +20,8 @@
 
 #define PERIPHERAL_ADDON_JOYSTICKS
 
-#include "kodi/xbmc_addon_dll.h"
-#include "kodi/kodi_peripheral_dll.h"
+#include "xbmc_addon_dll.h"
+#include "kodi_peripheral_dll.h"
 
 extern "C"
 {
