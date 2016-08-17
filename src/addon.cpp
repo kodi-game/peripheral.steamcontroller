@@ -87,6 +87,11 @@ PERIPHERAL_ERROR GetAddonCapabilities(PERIPHERAL_CAPABILITIES* pCapabilities)
   return PERIPHERAL_NO_ERROR;
 }
 
+bool SupportsDevice(const char* device_name)
+{
+  return false;
+}
+
 PERIPHERAL_ERROR PerformDeviceScan(unsigned int* peripheral_count, PERIPHERAL_INFO** scan_results)
 {
   return PERIPHERAL_ERROR_FAILED;
@@ -114,6 +119,22 @@ void FreeJoystickInfo(JOYSTICK_INFO* info)
 {
 }
 
+PERIPHERAL_ERROR GetAxisConfiguration(const JOYSTICK_INFO* joystick,
+                                      unsigned int* configuration_count, JOYSTICK_AXIS_CONFIG** configuration)
+{
+  return PERIPHERAL_ERROR_FAILED;
+}
+
+PERIPHERAL_ERROR SetAxisConfiguration(const JOYSTICK_INFO* joystick, JOYSTICK_AXIS_CONFIG* config)
+{
+  return PERIPHERAL_ERROR_FAILED;
+}
+
+void FreeAxisConfiguration(const JOYSTICK_INFO* joystick,
+                           unsigned int configuration_count, JOYSTICK_AXIS_CONFIG* configuration)
+{
+}
+
 PERIPHERAL_ERROR GetFeatures(const JOYSTICK_INFO* joystick, const char* controller_id,
                              unsigned int* feature_count, JOYSTICK_FEATURE** features)
 {
@@ -131,6 +152,10 @@ PERIPHERAL_ERROR MapFeatures(const JOYSTICK_INFO* joystick, const char* controll
 }
 
 void ResetButtonMap(const JOYSTICK_INFO* joystick, const char* controller_id)
+{
+}
+
+void PowerOffJoystick(unsigned int index)
 {
 }
 
