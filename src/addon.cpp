@@ -110,28 +110,17 @@ void FreeEvents(unsigned int event_count, PERIPHERAL_EVENT* events)
 {
 }
 
+bool SendEvent(const PERIPHERAL_EVENT* event)
+{
+  return false;
+}
+
 PERIPHERAL_ERROR GetJoystickInfo(unsigned int index, JOYSTICK_INFO* info)
 {
   return PERIPHERAL_ERROR_FAILED;
 }
 
 void FreeJoystickInfo(JOYSTICK_INFO* info)
-{
-}
-
-PERIPHERAL_ERROR GetAxisConfiguration(const JOYSTICK_INFO* joystick,
-                                      unsigned int* configuration_count, JOYSTICK_AXIS_CONFIG** configuration)
-{
-  return PERIPHERAL_ERROR_FAILED;
-}
-
-PERIPHERAL_ERROR SetAxisConfiguration(const JOYSTICK_INFO* joystick, JOYSTICK_AXIS_CONFIG* config)
-{
-  return PERIPHERAL_ERROR_FAILED;
-}
-
-void FreeAxisConfiguration(const JOYSTICK_INFO* joystick,
-                           unsigned int configuration_count, JOYSTICK_AXIS_CONFIG* configuration)
 {
 }
 
