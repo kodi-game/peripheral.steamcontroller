@@ -9,17 +9,17 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 find_package(Kodi REQUIRED)
 find_package(kodiplatform REQUIRED)
-find_package(LibUSB REQUIRED)
+find_package(libusb-1.0 REQUIRED)
 
 include_directories(${INCLUDES}
                     ${PROJECT_SOURCE_DIR}/src
                     ${KODI_INCLUDE_DIR}
                     ${kodiplatform_INCLUDE_DIRS}
-                    ${LibUSB_INCLUDE_DIRS})
+                    ${LIBUSB_1_INCLUDE_DIRS})
 
 set(STEAMCONTROLLER_SOURCES src/addon.cpp)
 
-list(APPEND DEPLIBS ${LibUSB_LIBRARIES})
+list(APPEND DEPLIBS ${LIBUSB_1_LIBRARIES})
 
 # ------------------------------------------------------------------------------
 
