@@ -23,6 +23,6 @@ list(APPEND DEPLIBS ${LIBUSB_1_LIBRARIES})
 
 # ------------------------------------------------------------------------------
 
-build_addon(peripheral.steamcontroller STEAMCONTROLLER DEPLIBS)
+build_addon(${PROJECT_NAME} STEAMCONTROLLER DEPLIBS)
 
 include(CPack)
