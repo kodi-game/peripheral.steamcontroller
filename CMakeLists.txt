@@ -23,7 +23,22 @@ include_directories(${INCLUDES}
                     ${kodiplatform_INCLUDE_DIRS}
                     ${LIBUSB_1_INCLUDE_DIRS})
 
-set(STEAMCONTROLLER_SOURCES src/addon.cpp)
+set(STEAMCONTROLLER_SOURCES
+    src/steamcontroller/SteamController.cpp
+    src/steamcontroller/SteamControllerInput.cpp
+    src/steamcontroller/SteamControllerManager.cpp
+    src/steamcontroller/SteamControllerTranslator.cpp
+    src/usb/USBConfiguration.cpp
+    src/usb/USBContext.cpp
+    src/usb/USBDevice.cpp
+    src/usb/USBDeviceHandle.cpp
+    src/usb/USBInterface.cpp
+    src/usb/USBInterfaceSetting.cpp
+    src/usb/USBThread.cpp
+    src/usb/USBTransfer.cpp
+    src/util/Log.cpp
+    src/addon.cpp
+)
 
 list(APPEND DEPLIBS
     ${LIBUSB_1_LIBRARIES}
