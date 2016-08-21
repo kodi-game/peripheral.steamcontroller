@@ -10,6 +10,8 @@ ExternalProject_Add(
                             --prefix=${OUTPUT_DIR}
                             --enable-static
                             --disable-shared
+                            --disable-examples-build
+                            --disable-tests-build
     INSTALL_COMMAND     ""
     BUILD_IN_SOURCE     1
 )
