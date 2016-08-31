@@ -6,7 +6,7 @@
   provider-name="Team-Kodi">
   <requires>
     <c-pluff version="0.1"/>
-    <import addon="kodi.peripheral" version="1.0.21"/>
+    <import addon="kodi.peripheral" version="1.1.0"/>
   </requires>
   <extension
     point="kodi.peripheral"
