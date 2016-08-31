@@ -53,6 +53,7 @@ bool CSteamControllerManager::Initialize()
 
 void CSteamControllerManager::Deinitialize()
 {
+  m_controllers.clear();
   m_context->Deinitialize();
 }
 
