@@ -1,7 +1,5 @@
+cmake_minimum_required(VERSION 3.1)
 project(peripheral.steamcontroller)
-
-cmake_minimum_required(VERSION 2.6)
-enable_language(CXX)
 
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
@@ -35,4 +33,3 @@ list(APPEND DEPLIBS
 
 build_addon(${PROJECT_NAME} STEAMCONTROLLER DEPLIBS)
 
-include(CPack)
