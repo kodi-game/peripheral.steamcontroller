@@ -111,7 +111,7 @@ ControllerPtr CSteamControllerManager::GetController(const DevicePtr& device)
   ControllerPtr controller;
 
   auto it = std::find_if(m_controllers.begin(), m_controllers.end(),
-    [device](const ControllerPtr& controller)
+    [&device](const ControllerPtr& controller)
     {
       return controller->Device().VendorID() == device->VendorID() &&
              controller->Device().ProductID() == device->ProductID();
