@@ -46,7 +46,7 @@ bool CUSBContext::Initialize()
   int res = libusb_init(&m_context);
   if (res < 0)
   {
-    esyslog("Failed to initialize libusb");
+    esyslog("Failed to initialize libusb (error = %d)", res);
     return false;
   }
 
@@ -113,7 +113,7 @@ void CUSBContext::HandleEvents()
 
   int res = libusb_handle_events(m_context);
   if (res < 0)
-    esyslog("Failed to handle USB events");
+    esyslog("Failed to handle USB events (error = %d)", res);
 }
 
 IFeedbackCallback* CUSBContext::GetFeedbackCallback()

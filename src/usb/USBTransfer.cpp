@@ -176,7 +176,7 @@ void CUSBTransfer::Cancel()
 
   int res = libusb_cancel_transfer(m_transfer);
   if (res < 0)
-    esyslog("Failed to cancel submitted transfer");
+    esyslog("Failed to cancel submitted transfer (error = %d)", res);
 }
 
 void CUSBTransfer::TransferCallback(libusb_transfer* transfer)

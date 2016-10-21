@@ -111,7 +111,7 @@ bool CUSBDeviceHandle::ClaimInterface(unsigned int interfaceNumber)
   int res = libusb_claim_interface(m_handle, interfaceNumber);
   if (res < 0)
   {
-    esyslog("Failed to claim interface");
+    esyslog("Failed to claim interface (error = %d)", res);
     return false;
   }
 
@@ -128,7 +128,7 @@ void CUSBDeviceHandle::ReleaseInterface(unsigned int interfaceNumber)
 
   int res = libusb_release_interface(m_handle, interfaceNumber);
   if (res < 0)
-    esyslog("Failed to release interface");
+    esyslog("Failed to release interface (error = %d)", res);
 }
 
 bool CUSBDeviceHandle::IsKernelDriverActive(unsigned int interfaceNumber)
@@ -150,7 +150,7 @@ bool CUSBDeviceHandle::DetachKernelDriver(unsigned int interfaceNumber)
   int res = libusb_detach_kernel_driver(m_handle, interfaceNumber);
   if (res < 0)
   {
-    esyslog("Failed to detach kernel driver");
+    esyslog("Failed to detach kernel driver (error = %d)", res);
     return false;
   }
 

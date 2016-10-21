@@ -41,9 +41,10 @@ CUSBDevice::~CUSBDevice()
 
 bool CUSBDevice::LoadDescriptor()
 {
-  if (libusb_get_device_descriptor(m_device, m_descriptor.get()) < 0)
+  int res = libusb_get_device_descriptor(m_device, m_descriptor.get());
+  if (res < 0)
   {
-    esyslog("Failed to get device descriptor");
+    esyslog("Failed to get device descriptor (error = %d)", res);
     return false;
   }
 
@@ -76,7 +77,7 @@ bool CUSBDevice::LoadConfiguration()
   }
   else if (res < 0)
   {
-    esyslog("Failed to get config descriptor");
+    esyslog("Failed to get config descriptor (error = %d)", res);
     return false;
   }
 
@@ -93,7 +94,7 @@ DeviceHandlePtr CUSBDevice::Open()
   int res = libusb_open(m_device, &handle);
   if (res < 0)
   {
-    esyslog("Failed to open device");
+    esyslog("Failed to open device (error = %d)", res);
   }
   else
   {
