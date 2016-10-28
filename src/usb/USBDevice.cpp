@@ -20,6 +20,7 @@
 
 #include "USBDevice.h"
 #include "USBConfiguration.h"
+#include "USBContext.h"
 #include "USBDeviceHandle.h"
 #include "util/Log.h"
 
@@ -27,7 +28,8 @@
 
 using namespace STEAMCONTROLLER;
 
-CUSBDevice::CUSBDevice(libusb_device* device) :
+CUSBDevice::CUSBDevice(libusb_device* device, CUSBContext& context) :
+  m_context(context),
   m_device(device),
   m_descriptor(new libusb_device_descriptor)
 {
@@ -98,7 +100,7 @@ DeviceHandlePtr CUSBDevice::Open()
   }
   else
   {
-    deviceHandle.reset(new CUSBDeviceHandle(handle));
+    deviceHandle.reset(new CUSBDeviceHandle(handle, m_context));
   }
 
   return deviceHandle;

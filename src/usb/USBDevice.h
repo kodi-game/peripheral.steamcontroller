@@ -26,6 +26,7 @@ struct libusb_device_descriptor;
 namespace STEAMCONTROLLER
 {
   class CUSBConfiguration;
+  class CUSBContext;
 
   /*!
    * \brief Represents a USB device
@@ -33,7 +34,7 @@ namespace STEAMCONTROLLER
   class CUSBDevice
   {
   public:
-    CUSBDevice(libusb_device* device);
+    CUSBDevice(libusb_device* device, CUSBContext& context);
 
     ~CUSBDevice();
 
@@ -51,6 +52,7 @@ namespace STEAMCONTROLLER
 
   private:
     // Construction params
+    CUSBContext& m_context;
     libusb_device* const m_device;
 
     std::unique_ptr<libusb_device_descriptor> m_descriptor;

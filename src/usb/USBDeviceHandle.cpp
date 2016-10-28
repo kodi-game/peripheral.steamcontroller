@@ -19,22 +19,22 @@
  */
 
 #include "USBDeviceHandle.h"
+#include "USBContext.h"
 #include "USBTransfer.h"
 #include "usb/interfaces/IMessageCallback.h"
 #include "util/Log.h"
 
 #include <algorithm>
-#include <assert.h>
 #include <libusb.h>
 #include <unistd.h>
 #include <utility>
 
 using namespace STEAMCONTROLLER;
 
-CUSBDeviceHandle::CUSBDeviceHandle(libusb_device_handle* handle) :
+CUSBDeviceHandle::CUSBDeviceHandle(libusb_device_handle* handle, CUSBContext& context) :
+  m_context(context),
   m_handle(handle)
 {
-  assert(m_handle != nullptr);
 }
 
 CUSBDeviceHandle::~CUSBDeviceHandle()
@@ -51,7 +51,7 @@ void CUSBDeviceHandle::Close()
     transfer->Cancel();
 
   while (!m_inflightTransfers.empty())
-    usleep(10);
+    m_context.HandleEvents();
 
   for (auto it = m_transfers.begin(); it != m_transfers.end(); ++it)
     it->first->Close();

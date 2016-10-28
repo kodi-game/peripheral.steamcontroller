@@ -32,6 +32,7 @@ struct libusb_device_handle;
 
 namespace STEAMCONTROLLER
 {
+  class CUSBContext;
   class IMessageCallback;
 
   /*!
@@ -41,7 +42,7 @@ namespace STEAMCONTROLLER
                            public ITransferCallback
   {
   public:
-    CUSBDeviceHandle(libusb_device_handle* handle);
+    CUSBDeviceHandle(libusb_device_handle* handle, CUSBContext& context);
 
     ~CUSBDeviceHandle();
 
@@ -135,6 +136,7 @@ namespace STEAMCONTROLLER
     std::set<CUSBTransfer*> m_inflightTransfers;
 
     // Construction parameters
+    CUSBContext& m_context;
     libusb_device_handle* m_handle;
   };
 }

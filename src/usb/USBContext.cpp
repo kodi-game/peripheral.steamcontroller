@@ -86,7 +86,7 @@ void CUSBContext::GetDevicesByID(const std::vector<USB_ID>& ids, DeviceVector& r
   for (ssize_t i = 0; i < count; i++)
   {
     libusb_device* dev = devices[i];
-    DevicePtr device = std::make_shared<CUSBDevice>(dev);
+    DevicePtr device = std::make_shared<CUSBDevice>(dev, *this);
 
     if (device->LoadDescriptor())
     {
