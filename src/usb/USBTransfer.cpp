@@ -96,6 +96,8 @@ bool CUSBTransfer::SetInterrupt(uint8_t endpoint, const std::string& buffer, ITr
 
   libusb_fill_interrupt_transfer(m_transfer, m_handle, endpoint, data, buffer.length(), transfer_cb_fn, this, timeoutMs);
 
+  m_bInitailized = true;
+
   return true;
 }
 
