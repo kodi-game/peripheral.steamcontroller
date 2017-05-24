@@ -135,34 +135,12 @@ void FreeFeatures(unsigned int feature_count, JOYSTICK_FEATURE* features)
 }
 
 PERIPHERAL_ERROR MapFeatures(const JOYSTICK_INFO* joystick, const char* controller_id,
-                             unsigned int feature_count, const JOYSTICK_FEATURE* features)
-{
-  return PERIPHERAL_ERROR_FAILED;
-}
-
-PERIPHERAL_ERROR GetIgnoredPrimitives(const JOYSTICK_INFO* joystick,
-                                      unsigned int* primitive_count,
-                                      JOYSTICK_DRIVER_PRIMITIVE** primitives)
-{
-  return PERIPHERAL_ERROR_FAILED;
-}
-
-void FreePrimitives(unsigned int primitive_count, JOYSTICK_DRIVER_PRIMITIVE* primitives)
-{
-}
-
-PERIPHERAL_ERROR SetIgnoredPrimitives(const JOYSTICK_INFO* joystick,
-                                      unsigned int primitive_count,
-                                      const JOYSTICK_DRIVER_PRIMITIVE* primitives)
+                             unsigned int feature_count, JOYSTICK_FEATURE* features)
 {
   return PERIPHERAL_ERROR_FAILED;
 }
 
 void SaveButtonMap(const JOYSTICK_INFO* joystick)
-{
-}
-
-void RevertButtonMap(const JOYSTICK_INFO* joystick)
 {
 }
 
