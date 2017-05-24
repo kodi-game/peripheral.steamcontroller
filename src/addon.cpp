@@ -101,11 +101,14 @@ ADDON_STATUS ADDON_Create(void* callbacks, void* props)
     // Initialize log here because other components depend on it
     CLog::Get().Initailize(frontend.get());
 
+    //! @TODO Fix hang in USB thread
+#if 0
     if (!CSteamControllerManager::Get().Initialize())
     {
       CLog::Get().Deinitailize();
       return ADDON_STATUS_PERMANENT_FAILURE;
     }
+#endif
 
     // Success
     FRONTEND = std::move(frontend);
@@ -158,7 +161,10 @@ PERIPHERAL_ERROR PerformDeviceScan(unsigned int* peripheral_count, PERIPHERAL_IN
 
   ControllerVector controllers;
 
+  //! @todo Fix permission error when opening usb device
+#if 0
   CSteamControllerManager::Get().GetControllers(controllers);
+#endif
 
   std::vector<ADDON::Peripheral> peripherals;
   std::transform(controllers.begin(), controllers.end(), std::back_inserter(peripherals),
@@ -187,7 +193,10 @@ PERIPHERAL_ERROR GetEvents(unsigned int* event_count, PERIPHERAL_EVENT** events)
 
   std::vector<ADDON::PeripheralEvent> peripheralEvents;
 
+  //! @todo Fix bug causing infinite loop
+#if 0
   CSteamControllerManager::Get().GetEvents(peripheralEvents);
+#endif
 
   *event_count = peripheralEvents.size();
   ADDON::PeripheralEvents::ToStructs(peripheralEvents, events);
