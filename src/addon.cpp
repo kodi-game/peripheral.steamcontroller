@@ -114,10 +114,6 @@ ADDON_STATUS ADDON_Create(void* callbacks, void* props)
   return ADDON_GetStatus();
 }
 
-void ADDON_Stop()
-{
-}
-
 void ADDON_Destroy()
 {
   CSteamControllerManager::Get().Deinitialize();
@@ -135,37 +131,9 @@ ADDON_STATUS ADDON_GetStatus()
   return ADDON_STATUS_OK;
 }
 
-bool ADDON_HasSettings()
-{
-  return false;
-}
-
-unsigned int ADDON_GetSettings(ADDON_StructSetting*** sSet)
-{
-  return 0;
-}
-
 ADDON_STATUS ADDON_SetSetting(const char* settingName, const void* settingValue)
 {
   return ADDON_STATUS_OK;
-}
-
-void ADDON_FreeSettings()
-{
-}
-
-void ADDON_Announce(const char* flag, const char* sender, const char* message, const void* data)
-{
-}
-
-const char* GetPeripheralAPIVersion(void)
-{
-  return PERIPHERAL_API_VERSION;
-}
-
-const char* GetMinimumPeripheralAPIVersion(void)
-{
-  return PERIPHERAL_MIN_API_VERSION;
 }
 
 PERIPHERAL_ERROR GetAddonCapabilities(PERIPHERAL_CAPABILITIES* pCapabilities)
@@ -278,12 +246,34 @@ void FreeFeatures(unsigned int feature_count, JOYSTICK_FEATURE* features)
 }
 
 PERIPHERAL_ERROR MapFeatures(const JOYSTICK_INFO* joystick, const char* controller_id,
-                             unsigned int feature_count, JOYSTICK_FEATURE* features)
+                             unsigned int feature_count, const JOYSTICK_FEATURE* features)
+{
+  return PERIPHERAL_ERROR_FAILED;
+}
+
+PERIPHERAL_ERROR GetIgnoredPrimitives(const JOYSTICK_INFO* joystick,
+                                      unsigned int* primitive_count,
+                                      JOYSTICK_DRIVER_PRIMITIVE** primitives)
+{
+  return PERIPHERAL_ERROR_FAILED;
+}
+
+void FreePrimitives(unsigned int primitive_count, JOYSTICK_DRIVER_PRIMITIVE* primitives)
+{
+}
+
+PERIPHERAL_ERROR SetIgnoredPrimitives(const JOYSTICK_INFO* joystick,
+                                      unsigned int primitive_count,
+                                      const JOYSTICK_DRIVER_PRIMITIVE* primitives)
 {
   return PERIPHERAL_ERROR_FAILED;
 }
 
 void SaveButtonMap(const JOYSTICK_INFO* joystick)
+{
+}
+
+void RevertButtonMap(const JOYSTICK_INFO* joystick)
 {
 }
 

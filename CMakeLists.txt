@@ -42,6 +42,29 @@ set(STEAMCONTROLLER_SOURCES
     src/addon.cpp
 )
 
+set(STEAMCONTROLLER_HEADERS
+    src/steamcontroller/interfaces/IFeedbackCallback.h
+    src/steamcontroller/SteamController.h
+    src/steamcontroller/SteamControllerInput.h
+    src/steamcontroller/SteamControllerManager.h
+    src/steamcontroller/SteamControllerTranslator.h
+    src/steamcontroller/SteamControllerTypes.h
+    src/usb/interfaces/IMessageCallback.h
+    src/usb/interfaces/ISendMessageCallback.h
+    src/usb/interfaces/ITransferCallback.h
+    src/usb/interfaces/ITransferObserver.h
+    src/usb/USBConfiguration.h
+    src/usb/USBContext.h
+    src/usb/USBDevice.h
+    src/usb/USBDeviceHandle.h
+    src/usb/USBInterface.h
+    src/usb/USBInterfaceSetting.h
+    src/usb/USBThread.h
+    src/usb/USBTransfer.h
+    src/usb/USBTypes.h
+    src/util/Log.h
+)
+
 list(APPEND DEPLIBS
     ${LIBUSB_1_LIBRARIES}
     ${p8-platform_LIBRARIES}
