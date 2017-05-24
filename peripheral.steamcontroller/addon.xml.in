@@ -14,7 +14,7 @@
     library_@PLATFORM@="@LIBRARY_FILENAME@"/>
   <extension point="xbmc.addon.metadata">
     <summary lang="en">Steam controller driver</summary>
-    <description lang="en">This driver enables input from the Steam controller. It is currently a work-in-progress and does not work yet..</description>
+    <description lang="en">This driver enables input from the Steam controller. It is a work-in-progress, and controllers do not work yet.</description>
     <platform>@PLATFORM@</platform>
     <nofanart>true</nofanart>
   </extension>
