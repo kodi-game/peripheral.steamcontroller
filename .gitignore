@@ -3,6 +3,7 @@
 .deps
 .libs
 .project
+.settings
 
 build
 Build

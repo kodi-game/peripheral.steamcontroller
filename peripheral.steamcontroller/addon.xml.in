@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="peripheral.steamcontroller"
-  version="0.0.1"
+  version="0.9.0"
   name="Steam controller driver"
   provider-name="Team-Kodi">
-  <requires>
-    <c-pluff version="0.1"/>
-    <import addon="kodi.peripheral" version="1.1.0"/>
-  </requires>
+  <requires>@ADDON_DEPENDS@</requires>
   <extension
     point="kodi.peripheral"
     provides_joysticks="true"
+    provides_buttonmaps="false"
     library_@PLATFORM@="@LIBRARY_FILENAME@"/>
   <extension point="xbmc.addon.metadata">
     <summary lang="en">Steam controller driver</summary>
-    <description lang="en">This driver enables input from the Steam controller. It is currently a work-in-progress and does not work yet..</description>
+    <description lang="en">This driver enables input from the Steam controller. It is a work-in-progress, and controllers do not work yet.</description>
     <platform>@PLATFORM@</platform>
     <nofanart>true</nofanart>
   </extension>
