@@ -30,7 +30,7 @@
 #include "usb/USBInterfaceSetting.h"
 #include "usb/USBTransfer.h"
 
-#include "kodi_peripheral_utils.hpp"
+#include <kodi/addon-instance/PeripheralUtils.h>
 #include "p8-platform/util/timeutils.h"
 
 #include <algorithm>
@@ -203,7 +203,7 @@ void CSteamController::ProcessInput()
   m_input.swap(m_previousInput);
 }
 
-void CSteamController::GetPeripheralInfo(ADDON::Peripheral& peripheralInfo)
+void CSteamController::GetPeripheralInfo(kodi::addon::Peripheral& peripheralInfo)
 {
   peripheralInfo.SetType(PERIPHERAL_TYPE_JOYSTICK);
   peripheralInfo.SetName(STEAM_CONTROLLER_NAME);
@@ -212,7 +212,7 @@ void CSteamController::GetPeripheralInfo(ADDON::Peripheral& peripheralInfo)
   peripheralInfo.SetIndex(m_index);
 }
 
-void CSteamController::GetJoystickInfo(ADDON::Joystick& joystickInfo)
+void CSteamController::GetJoystickInfo(kodi::addon::Joystick& joystickInfo)
 {
   GetPeripheralInfo(joystickInfo);
 
@@ -222,7 +222,7 @@ void CSteamController::GetJoystickInfo(ADDON::Joystick& joystickInfo)
   joystickInfo.SetMotorCount(2);
 }
 
-bool CSteamController::SendEvent(const ADDON::PeripheralEvent& event)
+bool CSteamController::SendEvent(const kodi::addon::PeripheralEvent& event)
 {
   switch (event.Type())
   {

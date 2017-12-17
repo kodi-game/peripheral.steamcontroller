@@ -24,7 +24,7 @@
 #include "USBTransfer.h"
 #include "usb/interfaces/ISendMessageCallback.h"
 
-#include "kodi_peripheral_utils.hpp"
+#include <kodi/addon-instance/PeripheralUtils.h>
 
 #include <algorithm>
 #include <assert.h>

@@ -24,9 +24,12 @@
 
 #include <memory>
 
-namespace ADDON
+namespace kodi
+{
+namespace addon
 {
   class PeripheralEvent;
+}
 }
 
 namespace STEAMCONTROLLER
@@ -49,9 +52,9 @@ namespace STEAMCONTROLLER
 
     ControllerPtr GetController(const DevicePtr& device);
 
-    void GetEvents(std::vector<ADDON::PeripheralEvent>& events);
+    void GetEvents(std::vector<kodi::addon::PeripheralEvent>& events);
 
-    bool SendEvent(const ADDON::PeripheralEvent& events);
+    bool SendEvent(const kodi::addon::PeripheralEvent& events);
 
   private:
     ControllerVector m_controllers;

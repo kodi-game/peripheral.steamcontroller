@@ -28,11 +28,14 @@
 #include <stdint.h>
 #include <vector>
 
-namespace ADDON
+namespace kodi
+{
+namespace addon
 {
   class Joystick;
   class Peripheral;
   class PeripheralEvent;
+}
 }
 
 namespace STEAMCONTROLLER
@@ -61,9 +64,9 @@ namespace STEAMCONTROLLER
     virtual void SendControl(const uint8_t* data, size_t length, unsigned int timeout = 0) override;
 
     // Peripheral interface
-    void GetPeripheralInfo(ADDON::Peripheral& peripheralInfo);
-    void GetJoystickInfo(ADDON::Joystick& joystickInfo);
-    bool SendEvent(const ADDON::PeripheralEvent& event);
+    void GetPeripheralInfo(kodi::addon::Peripheral& peripheralInfo);
+    void GetJoystickInfo(kodi::addon::Joystick& joystickInfo);
+    bool SendEvent(const kodi::addon::PeripheralEvent& event);
 
     void SendControl(const std::vector<uint32_t>& data, unsigned int timeout = 0);
 

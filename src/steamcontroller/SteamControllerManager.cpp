@@ -23,7 +23,7 @@
 #include "usb/USBContext.h"
 #include "usb/USBDevice.h"
 
-#include "kodi_peripheral_utils.hpp"
+#include <kodi/addon-instance/PeripheralUtils.h>
 
 #include <algorithm>
 #include <cstring>
@@ -123,12 +123,12 @@ ControllerPtr CSteamControllerManager::GetController(const DevicePtr& device)
   return controller;
 }
 
-void CSteamControllerManager::GetEvents(std::vector<ADDON::PeripheralEvent>& events)
+void CSteamControllerManager::GetEvents(std::vector<kodi::addon::PeripheralEvent>& events)
 {
   // TODO
 }
 
-bool CSteamControllerManager::SendEvent(const ADDON::PeripheralEvent& events)
+bool CSteamControllerManager::SendEvent(const kodi::addon::PeripheralEvent& events)
 {
   return false; // TODO
 }
