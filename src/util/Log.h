@@ -31,11 +31,6 @@
 #define esyslog(...) STEAMCONTROLLER::CLog::Get().Log(STEAMCONTROLLER::LOG_ERROR, __VA_ARGS__)
 #endif
 
-namespace ADDON
-{
-  class CHelper_libXBMC_addon;
-}
-
 namespace STEAMCONTROLLER
 {
   enum LogLevel
@@ -52,12 +47,6 @@ namespace STEAMCONTROLLER
   public:
     static CLog& Get();
 
-    void Initailize(ADDON::CHelper_libXBMC_addon* frontend);
-    void Deinitailize();
-
     void Log(LogLevel level, const char* format, ...);
-
-  private:
-    ADDON::CHelper_libXBMC_addon* m_frontend;
   };
 }

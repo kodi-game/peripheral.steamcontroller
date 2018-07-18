@@ -18,7 +18,7 @@ ENDIF (APPLE)
 
 include_directories(${INCLUDES}
                     ${PROJECT_SOURCE_DIR}/src
-                    ${KODI_INCLUDE_DIR}
+                    ${KODI_INCLUDE_DIR}/.. # HACK (see https://github.com/xbmc/peripheral.joystick/pull/112)
                     ${kodiplatform_INCLUDE_DIRS}
                     ${LIBUSB_1_INCLUDE_DIRS}
                     ${p8-platform_INCLUDE_DIRS})
