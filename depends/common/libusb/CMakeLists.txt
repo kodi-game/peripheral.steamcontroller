@@ -6,10 +6,12 @@ include(ExternalProject)
 ExternalProject_Add(
     libusb
     SOURCE_DIR          ${CMAKE_SOURCE_DIR}
-    CONFIGURE_COMMAND   <SOURCE_DIR>/autogen.sh
-                            --prefix=${OUTPUT_DIR}
+    CONFIGURE_COMMAND   <SOURCE_DIR>/bootstrap.sh
+    COMMAND             <SOURCE_DIR>/configure
+                            --prefix=${CMAKE_INSTALL_PREFIX}
                             --enable-static
                             --disable-shared
+                            --with-pic
                             --disable-examples-build
                             --disable-tests-build
                             --with-pic
