@@ -22,6 +22,10 @@ matrix:
       sudo: required
       compiler: clang
 
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y libudev-dev; fi
+
 #
 # The addon source is automatically checked out in $TRAVIS_BUILD_DIR,
 # we'll put the Kodi source on the same level
