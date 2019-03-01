@@ -6,7 +6,6 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 # --- Add-on Dependencies ------------------------------------------------------
 
 find_package(Kodi REQUIRED)
-find_package(kodiplatform REQUIRED)
 find_package(libusb-1.0 REQUIRED)
 find_package(p8-platform REQUIRED)
 
@@ -19,7 +18,6 @@ ENDIF (APPLE)
 include_directories(${INCLUDES}
                     ${PROJECT_SOURCE_DIR}/src
                     ${KODI_INCLUDE_DIR}/.. # HACK (see https://github.com/xbmc/peripheral.joystick/pull/112)
-                    ${kodiplatform_INCLUDE_DIRS}
                     ${LIBUSB_1_INCLUDE_DIRS}
                     ${p8-platform_INCLUDE_DIRS})
 
