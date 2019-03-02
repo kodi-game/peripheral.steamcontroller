@@ -3,7 +3,7 @@
   id="peripheral.steamcontroller"
   version="0.10.0"
   name="Steam controller driver"
-  provider-name="Team-Kodi">
+  provider-name="Team Kodi">
   <requires>@ADDON_DEPENDS@</requires>
   <extension
     point="kodi.peripheral"
