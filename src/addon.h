@@ -70,18 +70,7 @@
 
 #include <memory>
 
-//! @todo Remove me
-#if defined _WIN32 || defined __CYGWIN__
-  #define DLL_PRIVATE
-#else
-  #if __GNUC__ >= 4
-    #define DLL_PRIVATE  __attribute__ ((visibility ("hidden")))
-  #else
-    #define DLL_PRIVATE
-  #endif
-#endif
-
-class DLL_PRIVATE CPeripheralSteamController :
+class ATTRIBUTE_HIDDEN CPeripheralSteamController :
   public kodi::addon::CAddonBase,
   public kodi::addon::CInstancePeripheral
 {
