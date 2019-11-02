@@ -69,3 +69,4 @@ list(APPEND DEPLIBS
 
 build_addon(${PROJECT_NAME} STEAMCONTROLLER DEPLIBS)
 
+include(CPack)
