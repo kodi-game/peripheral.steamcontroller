@@ -58,10 +58,10 @@ namespace STEAMCONTROLLER
     CUSBDevice& Device() const { return *m_device; }
 
     // implementation of IMessageCallback
-    virtual void OnTransferComplete(const std::vector<uint8_t>& message) override;
+    void OnTransferComplete(const std::vector<uint8_t>& message) override;
 
     // implementation of ISendMessageCallback
-    virtual void SendControl(const uint8_t* data, size_t length, unsigned int timeout = 0) override;
+    void SendControl(const uint8_t* data, size_t length, unsigned int timeout = 0) override;
 
     // Peripheral interface
     void GetPeripheralInfo(kodi::addon::Peripheral& peripheralInfo);

@@ -48,13 +48,13 @@ namespace STEAMCONTROLLER
     void Deinitialize(bool bWait);
 
     // implementation of IFeedbackCallback
-    virtual void RegisterDeviceHandle(CUSBDeviceHandle* deviceHandle) override;
-    virtual void UnregisterDeviceHandle(CUSBDeviceHandle* deviceHandle) override;
-    virtual void AddMessage(ISendMessageCallback* callback, std::vector<uint8_t>&& message) override;
+    void RegisterDeviceHandle(CUSBDeviceHandle* deviceHandle) override;
+    void UnregisterDeviceHandle(CUSBDeviceHandle* deviceHandle) override;
+    void AddMessage(ISendMessageCallback* callback, std::vector<uint8_t>&& message) override;
 
   protected:
     // implementation of CThread
-    virtual void* Process() override;
+    void* Process() override;
 
   private:
     struct FeedbackMessage

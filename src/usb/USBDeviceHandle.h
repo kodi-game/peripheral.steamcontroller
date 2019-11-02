@@ -60,11 +60,11 @@ namespace STEAMCONTROLLER
     void Close();
 
     // implementation of ITransferObserver
-    virtual void BeforeSubmit(CUSBTransfer* transfer) override;
-    virtual void AfterCompletion(CUSBTransfer* transfer) override;
+    void BeforeSubmit(CUSBTransfer* transfer) override;
+    void AfterCompletion(CUSBTransfer* transfer) override;
 
     // implementation of ITransferCallback
-    virtual void OnTransferComplete(CUSBTransfer* transfer) override;
+    void OnTransferComplete(CUSBTransfer* transfer) override;
 
     /*!
      * \brief Claim (get exclusive access to) given interface number
