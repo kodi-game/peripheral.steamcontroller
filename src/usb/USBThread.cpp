@@ -1,6 +1,6 @@
 /*
- *      Copyright (C) 2016 Garrett Brown
- *      Copyright (C) 2016 Team Kodi
+ *      Copyright (C) 2016-2020 Garrett Brown
+ *      Copyright (C) 2016-2020 Team Kodi
  *
  *  This Program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -56,7 +56,7 @@ void CUSBThread::Deinitialize()
 
 void CUSBThread::RegisterDeviceHandle(CUSBDeviceHandle* deviceHandle)
 {
-  std::unique_lock<std::mutex> lock(m_mutex);
+  std::unique_lock<std::recursive_mutex> lock(m_mutex);
 
   m_deviceHandles.push_back(deviceHandle);
 
@@ -66,7 +66,7 @@ void CUSBThread::RegisterDeviceHandle(CUSBDeviceHandle* deviceHandle)
 
 void CUSBThread::UnregisterDeviceHandle(CUSBDeviceHandle* deviceHandle)
 {
-  std::unique_lock<std::mutex> lock(m_mutex);
+  std::unique_lock<std::recursive_mutex> lock(m_mutex);
 
   m_deviceHandles.erase(std::remove(m_deviceHandles.begin(), m_deviceHandles.end(), deviceHandle), m_deviceHandles.end());
 
@@ -79,7 +79,7 @@ void CUSBThread::UnregisterDeviceHandle(CUSBDeviceHandle* deviceHandle)
 
 void CUSBThread::AddMessage(ISendMessageCallback* callback, std::vector<uint8_t>&& message)
 {
-  std::unique_lock<std::mutex> lock(m_mutex);
+  std::unique_lock<std::recursive_mutex> lock(m_mutex);
 
   m_messagesIn.push_front({ callback, message });
 }
@@ -96,7 +96,7 @@ void CUSBThread::Process()
     bool bIsAnySubmitted = true; // TODO
 
     {
-      std::unique_lock<std::mutex> lock(m_mutex);
+      std::unique_lock<std::recursive_mutex> lock(m_mutex);
 
       // Check if any device handles have transfers submitted
       auto itDeviceHandle = std::find_if(m_deviceHandles.begin(), m_deviceHandles.end(),
@@ -112,7 +112,7 @@ void CUSBThread::Process()
     {
       m_context->HandleEvents();
 
-      std::unique_lock<std::mutex> lock(m_mutex);
+      std::unique_lock<std::recursive_mutex> lock(m_mutex);
 
       // Handle haptic feedback
       if (!m_messagesIn.empty())

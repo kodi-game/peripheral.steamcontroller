@@ -1,6 +1,6 @@
 /*
- *      Copyright (C) 2016 Garrett Brown
- *      Copyright (C) 2016 Team Kodi
+ *      Copyright (C) 2016-2020 Garrett Brown
+ *      Copyright (C) 2016-2020 Team Kodi
  *
  *  This Program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -70,7 +70,7 @@ namespace STEAMCONTROLLER
 
     std::list<FeedbackMessage> m_messagesIn;
 
-    std::mutex m_mutex;
+    std::recursive_mutex m_mutex;
     std::thread* m_thread = nullptr;
     bool m_isStopped = true;
   };
