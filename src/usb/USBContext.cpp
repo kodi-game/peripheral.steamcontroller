@@ -60,7 +60,7 @@ bool CUSBContext::Initialize()
 
 void CUSBContext::Deinitialize()
 {
-  m_thread->Deinitialize(true);
+  m_thread->Deinitialize();
 
   if (m_context)
   {

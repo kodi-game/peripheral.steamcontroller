@@ -123,7 +123,7 @@ namespace STEAMCONTROLLER
     std::unique_ptr<CSteamControllerInput> m_input;
     std::unique_ptr<CSteamControllerInput> m_previousInput;
 
-    int64_t m_lastUsbTimeMs;
+    double  m_lastUsbTimeMs;
     float   m_period;
   };
 }

@@ -28,6 +28,7 @@
 
 #include <algorithm>
 #include <assert.h>
+#include <chrono>
 #include <libusb.h>
 
 using namespace STEAMCONTROLLER;
@@ -38,42 +39,47 @@ CUSBThread::CUSBThread(CUSBContext* context) :
   assert(m_context != nullptr);
 }
 
-void CUSBThread::Deinitialize(bool bWait)
+CUSBThread::~CUSBThread()
 {
-  StopThread(bWait ? 0 : -1);
+  Deinitialize();
+}
+
+void CUSBThread::Deinitialize()
+{
+  m_isStopped = true;
+  if (m_thread->joinable())
+    m_thread->join();
+
+  delete m_thread;
+  m_thread = nullptr;
 }
 
 void CUSBThread::RegisterDeviceHandle(CUSBDeviceHandle* deviceHandle)
 {
-  using namespace P8PLATFORM;
-
-  CLockObject lock(m_mutex);
+  std::unique_lock<std::mutex> lock(m_mutex);
 
   m_deviceHandles.push_back(deviceHandle);
 
-  CreateThread(true);
+  m_isStopped = false;
+  m_thread = new std::thread(&CUSBThread::Process, this);
 }
 
 void CUSBThread::UnregisterDeviceHandle(CUSBDeviceHandle* deviceHandle)
 {
-  using namespace P8PLATFORM;
-
-  CLockObject lock(m_mutex);
+  std::unique_lock<std::mutex> lock(m_mutex);
 
   m_deviceHandles.erase(std::remove(m_deviceHandles.begin(), m_deviceHandles.end(), deviceHandle), m_deviceHandles.end());
 
   if (m_deviceHandles.empty())
   {
-    lock.Unlock();
-    Deinitialize(true);
+    lock.unlock();
+    Deinitialize();
   }
 }
 
 void CUSBThread::AddMessage(ISendMessageCallback* callback, std::vector<uint8_t>&& message)
 {
-  using namespace P8PLATFORM;
-
-  CLockObject lock(m_mutex);
+  std::unique_lock<std::mutex> lock(m_mutex);
 
   m_messagesIn.push_front({ callback, message });
 }
@@ -83,16 +89,14 @@ void CUSBThread::SendMessage(const FeedbackMessage& message)
   message.callback->SendControl(message.data.data(), message.data.size());
 }
 
-void* CUSBThread::Process()
+void CUSBThread::Process()
 {
-  using namespace P8PLATFORM;
-
-  while (!IsStopped())
+  while (!m_isStopped)
   {
     bool bIsAnySubmitted = true; // TODO
 
     {
-      CLockObject lock(m_mutex);
+      std::unique_lock<std::mutex> lock(m_mutex);
 
       // Check if any device handles have transfers submitted
       auto itDeviceHandle = std::find_if(m_deviceHandles.begin(), m_deviceHandles.end(),
@@ -108,7 +112,7 @@ void* CUSBThread::Process()
     {
       m_context->HandleEvents();
 
-      CLockObject lock(m_mutex);
+      std::unique_lock<std::mutex> lock(m_mutex);
 
       // Handle haptic feedback
       if (!m_messagesIn.empty())
@@ -118,7 +122,6 @@ void* CUSBThread::Process()
       }
     }
     else
-      usleep(100);
+      std::this_thread::sleep_for(std::chrono::microseconds(100));
   }
-  return nullptr;
 }
