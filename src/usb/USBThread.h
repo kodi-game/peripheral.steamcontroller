@@ -1,6 +1,6 @@
 /*
- *      Copyright (C) 2016 Garrett Brown
- *      Copyright (C) 2016 Team Kodi
+ *      Copyright (C) 2016-2020 Garrett Brown
+ *      Copyright (C) 2016-2020 Team Kodi
  *
  *  This Program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,10 +21,10 @@
 
 #include "steamcontroller/interfaces/IFeedbackCallback.h"
 
-#include "p8-platform/threads/threads.h"
-
 #include <list>
+#include <mutex>
 #include <stdint.h>
+#include <thread>
 #include <vector>
 
 namespace STEAMCONTROLLER
@@ -36,25 +36,23 @@ namespace STEAMCONTROLLER
   /*!
    * \brief Thread to run in order to process USB events
    */
-  class CUSBThread : public IFeedbackCallback,
-                     protected P8PLATFORM::CThread
+  class CUSBThread : public IFeedbackCallback
   {
   public:
     CUSBThread(CUSBContext* context);
-
-    ~CUSBThread() { Deinitialize(true); }
+    ~CUSBThread() override;
 
     void Initialize() { }
-    void Deinitialize(bool bWait);
+    void Deinitialize();
 
     // implementation of IFeedbackCallback
-    virtual void RegisterDeviceHandle(CUSBDeviceHandle* deviceHandle) override;
-    virtual void UnregisterDeviceHandle(CUSBDeviceHandle* deviceHandle) override;
-    virtual void AddMessage(ISendMessageCallback* callback, std::vector<uint8_t>&& message) override;
+    void RegisterDeviceHandle(CUSBDeviceHandle* deviceHandle) override;
+    void UnregisterDeviceHandle(CUSBDeviceHandle* deviceHandle) override;
+    void AddMessage(ISendMessageCallback* callback, std::vector<uint8_t>&& message) override;
 
   protected:
     // implementation of CThread
-    virtual void* Process() override;
+    void Process();
 
   private:
     struct FeedbackMessage
@@ -72,7 +70,8 @@ namespace STEAMCONTROLLER
 
     std::list<FeedbackMessage> m_messagesIn;
 
-    P8PLATFORM::CMutex m_mutex;
-    P8PLATFORM::CEvent m_deviceAddEvent;
+    std::recursive_mutex m_mutex;
+    std::thread* m_thread = nullptr;
+    bool m_isStopped = true;
   };
 }

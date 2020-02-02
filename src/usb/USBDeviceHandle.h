@@ -1,6 +1,6 @@
 /*
- *      Copyright (C) 2016 Garrett Brown
- *      Copyright (C) 2016 Team Kodi
+ *      Copyright (C) 2016-2020 Garrett Brown
+ *      Copyright (C) 2016-2020 Team Kodi
  *
  *  This Program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -60,11 +60,11 @@ namespace STEAMCONTROLLER
     void Close();
 
     // implementation of ITransferObserver
-    virtual void BeforeSubmit(CUSBTransfer* transfer) override;
-    virtual void AfterCompletion(CUSBTransfer* transfer) override;
+    void BeforeSubmit(CUSBTransfer* transfer) override;
+    void AfterCompletion(CUSBTransfer* transfer) override;
 
     // implementation of ITransferCallback
-    virtual void OnTransferComplete(CUSBTransfer* transfer) override;
+    void OnTransferComplete(CUSBTransfer* transfer) override;
 
     /*!
      * \brief Claim (get exclusive access to) given interface number

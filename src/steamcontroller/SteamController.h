@@ -1,6 +1,6 @@
 /*
- *      Copyright (C) 2016 Garrett Brown
- *      Copyright (C) 2016 Team Kodi
+ *      Copyright (C) 2016-2020 Garrett Brown
+ *      Copyright (C) 2016-2020 Team Kodi
  *
  *  This Program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -58,10 +58,10 @@ namespace STEAMCONTROLLER
     CUSBDevice& Device() const { return *m_device; }
 
     // implementation of IMessageCallback
-    virtual void OnTransferComplete(const std::vector<uint8_t>& message) override;
+    void OnTransferComplete(const std::vector<uint8_t>& message) override;
 
     // implementation of ISendMessageCallback
-    virtual void SendControl(const uint8_t* data, size_t length, unsigned int timeout = 0) override;
+    void SendControl(const uint8_t* data, size_t length, unsigned int timeout = 0) override;
 
     // Peripheral interface
     void GetPeripheralInfo(kodi::addon::Peripheral& peripheralInfo);
@@ -123,7 +123,7 @@ namespace STEAMCONTROLLER
     std::unique_ptr<CSteamControllerInput> m_input;
     std::unique_ptr<CSteamControllerInput> m_previousInput;
 
-    int64_t m_lastUsbTimeMs;
+    double  m_lastUsbTimeMs;
     float   m_period;
   };
 }

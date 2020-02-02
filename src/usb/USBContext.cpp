@@ -1,6 +1,6 @@
 /*
- *      Copyright (C) 2016 Garrett Brown
- *      Copyright (C) 2016 Team Kodi
+ *      Copyright (C) 2016-2020 Garrett Brown
+ *      Copyright (C) 2016-2020 Team Kodi
  *
  *  This Program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -60,7 +60,7 @@ bool CUSBContext::Initialize()
 
 void CUSBContext::Deinitialize()
 {
-  m_thread->Deinitialize(true);
+  m_thread->Deinitialize();
 
   if (m_context)
   {

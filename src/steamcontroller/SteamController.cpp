@@ -1,6 +1,6 @@
 /*
- *      Copyright (C) 2015-2016 Garrett Brown
- *      Copyright (C) 2015-2016 Team Kodi
+ *      Copyright (C) 2015-2020 Garrett Brown
+ *      Copyright (C) 2015-2020 Team Kodi
  *
  *  This Program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,10 +31,10 @@
 #include "usb/USBTransfer.h"
 
 #include <kodi/addon-instance/PeripheralUtils.h>
-#include "p8-platform/util/timeutils.h"
 
 #include <algorithm>
 #include <assert.h>
+#include <chrono>
 #include <libusb.h>
 
 using namespace STEAMCONTROLLER;
@@ -95,7 +95,7 @@ CSteamController::CSteamController(const DevicePtr& device, unsigned int index, 
   m_feedbackCallback(feedbackCallback),
   m_input(new CSteamControllerInput),
   m_previousInput(new CSteamControllerInput),
-  m_lastUsbTimeMs(-1),
+  m_lastUsbTimeMs(0.0),
   m_period(0.0f)
 {
   assert(m_device.get() != nullptr);
@@ -130,7 +130,7 @@ bool CSteamController::Initialize()
   m_input->Reset();
   m_previousInput->Reset();
 
-  m_lastUsbTimeMs = P8PLATFORM::GetTimeMs();
+  m_lastUsbTimeMs = std::chrono::duration<double>(std::chrono::system_clock::now().time_since_epoch()).count();
 
   return true;
 }
