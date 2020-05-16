@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="peripheral.steamcontroller"
-  version="0.10.0"
+  version="0.10.1"
   name="Steam controller driver"
   provider-name="Team Kodi">
   <requires>@ADDON_DEPENDS@</requires>
