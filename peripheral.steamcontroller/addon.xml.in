@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="peripheral.steamcontroller"
-  version="0.10.0"
+  version="0.10.1"
   name="Steam controller driver"
   provider-name="Team Kodi">
   <requires>@ADDON_DEPENDS@</requires>
@@ -11,9 +11,10 @@
     provides_buttonmaps="false"
     library_@PLATFORM@="@LIBRARY_FILENAME@"/>
   <extension point="xbmc.addon.metadata">
-    <summary lang="en">Steam controller driver</summary>
-    <description lang="en">This driver enables input from the Steam controller. It is a work-in-progress, and controllers do not work yet.</description>
+    <summary lang="en_GB">Steam controller driver</summary>
+    <description lang="en_GB">This driver enables input from the Steam controller. It is a work-in-progress, and controllers do not work yet.</description>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/kodi-game/peripheral.steamcontroller</source>
     <platform>@PLATFORM@</platform>
-    <nofanart>true</nofanart>
   </extension>
 </addon>
