@@ -11,8 +11,6 @@
 #include "steamcontroller/SteamControllerManager.h"
 #include "util/Log.h"
 
-#include <kodi/addon-instance/PeripheralUtils.h>
-
 #include <algorithm>
 #include <iterator>
 #include <memory>
@@ -49,9 +47,9 @@ ADDON_STATUS CPeripheralSteamController::SetSetting(const std::string& settingNa
   return ADDON_STATUS_OK;
 }
 
-void CPeripheralSteamController::GetCapabilities(PERIPHERAL_CAPABILITIES& capabilities)
+void CPeripheralSteamController::GetCapabilities(kodi::addon::PeripheralCapabilities& capabilities)
 {
-  capabilities.provides_joysticks = true;
+  capabilities.SetProvidesJoysticks(true);
 }
 
 bool SupportsDevice(const char* device_name)
@@ -59,140 +57,82 @@ bool SupportsDevice(const char* device_name)
   return false;
 }
 
-PERIPHERAL_ERROR CPeripheralSteamController::PerformDeviceScan(unsigned int* peripheral_count, PERIPHERAL_INFO** scan_results)
+PERIPHERAL_ERROR CPeripheralSteamController::PerformDeviceScan(std::vector<std::shared_ptr<kodi::addon::Peripheral>>& scan_results)
 {
-  if (peripheral_count == nullptr || scan_results == nullptr)
-    return PERIPHERAL_ERROR_INVALID_PARAMETERS;
-
-  ControllerVector controllers;
-
   //! @todo Fix permission error when opening usb device
 #if 0
-  CSteamControllerManager::Get().GetControllers(controllers);
+  CSteamControllerManager::Get().GetControllers(scan_results);
 #endif
-
-  std::vector<kodi::addon::Peripheral> peripherals;
-  std::transform(controllers.begin(), controllers.end(), std::back_inserter(peripherals),
-    [](const ControllerPtr& controller)
-    {
-      kodi::addon::Peripheral peripheralInfo;
-      controller->GetPeripheralInfo(peripheralInfo);
-      return peripheralInfo;
-    });
-
-  *peripheral_count = peripherals.size();
-  kodi::addon::Peripherals::ToStructs(peripherals, scan_results);
 
   return PERIPHERAL_NO_ERROR;
 }
 
-void CPeripheralSteamController::FreeScanResults(unsigned int peripheral_count, PERIPHERAL_INFO* scan_results)
+PERIPHERAL_ERROR CPeripheralSteamController::GetEvents(std::vector<kodi::addon::PeripheralEvent>& events)
 {
-  kodi::addon::Peripherals::FreeStructs(peripheral_count, scan_results);
-}
-
-PERIPHERAL_ERROR CPeripheralSteamController::GetEvents(unsigned int* event_count, PERIPHERAL_EVENT** events)
-{
-  if (event_count == nullptr || events == nullptr)
-    return PERIPHERAL_ERROR_INVALID_PARAMETERS;
-
-  std::vector<kodi::addon::PeripheralEvent> peripheralEvents;
-
   //! @todo Fix bug causing infinite loop
 #if 0
-  CSteamControllerManager::Get().GetEvents(peripheralEvents);
+  CSteamControllerManager::Get().GetEvents(events);
 #endif
-
-  *event_count = peripheralEvents.size();
-  kodi::addon::PeripheralEvents::ToStructs(peripheralEvents, events);
 
   return PERIPHERAL_NO_ERROR;
 }
 
-void CPeripheralSteamController::FreeEvents(unsigned int event_count, PERIPHERAL_EVENT* events)
+bool CPeripheralSteamController::SendEvent(const kodi::addon::PeripheralEvent& event)
 {
-  kodi::addon::PeripheralEvents::FreeStructs(event_count, events);
+  return CSteamControllerManager::Get().SendEvent(event);
 }
 
-bool CPeripheralSteamController::SendEvent(const PERIPHERAL_EVENT* event)
+PERIPHERAL_ERROR CPeripheralSteamController::GetJoystickInfo(unsigned int index, kodi::addon::Joystick& info)
 {
-  if (event == nullptr)
-    return PERIPHERAL_ERROR_INVALID_PARAMETERS;
-
-  kodi::addon::PeripheralEvent peripheralEvent(*event);
-
-  return CSteamControllerManager::Get().SendEvent(peripheralEvent);
-}
-
-PERIPHERAL_ERROR CPeripheralSteamController::GetJoystickInfo(unsigned int index, JOYSTICK_INFO* info)
-{
-  if (info == nullptr)
-    return PERIPHERAL_ERROR_INVALID_PARAMETERS;
-
   ControllerPtr controller = CSteamControllerManager::Get().GetController(index);
   if (controller)
   {
-    kodi::addon::Joystick joystickInfo;
-    controller->GetJoystickInfo(joystickInfo);
-    joystickInfo.ToStruct(*info);
+    controller->GetJoystickInfo(info);
     return PERIPHERAL_NO_ERROR;
   }
 
   return PERIPHERAL_ERROR_FAILED;
 }
 
-void CPeripheralSteamController::FreeJoystickInfo(JOYSTICK_INFO* info)
-{
-  if (info == nullptr)
-    return;
-
-  kodi::addon::Joystick::FreeStruct(*info);
-}
-
-PERIPHERAL_ERROR CPeripheralSteamController::GetFeatures(const JOYSTICK_INFO* joystick, const char* controller_id,
-                                                         unsigned int* feature_count, JOYSTICK_FEATURE** features)
+PERIPHERAL_ERROR CPeripheralSteamController::GetFeatures(const kodi::addon::Joystick& joystick,
+                                                         const std::string& controller_id,
+                                                         std::vector<kodi::addon::JoystickFeature>& features)
 {
   return PERIPHERAL_ERROR_FAILED;
 }
 
-void CPeripheralSteamController::FreeFeatures(unsigned int feature_count, JOYSTICK_FEATURE* features)
-{
-}
-
-PERIPHERAL_ERROR CPeripheralSteamController::MapFeatures(const JOYSTICK_INFO* joystick, const char* controller_id,
-                                                         unsigned int feature_count, const JOYSTICK_FEATURE* features)
+PERIPHERAL_ERROR CPeripheralSteamController::MapFeatures(const kodi::addon::Joystick& joystick,
+                                                         const std::string& controller_id,
+                                                         const std::vector<kodi::addon::JoystickFeature>& features)
 {
   return PERIPHERAL_ERROR_FAILED;
 }
 
-PERIPHERAL_ERROR CPeripheralSteamController::GetIgnoredPrimitives(const JOYSTICK_INFO* joystick,
-                                                                  unsigned int* primitive_count,
-                                                                  JOYSTICK_DRIVER_PRIMITIVE** primitives)
+PERIPHERAL_ERROR CPeripheralSteamController::GetIgnoredPrimitives(const kodi::addon::Joystick& joystick,
+                                                                  std::vector<kodi::addon::DriverPrimitive>& primitives)
 {
   return PERIPHERAL_ERROR_FAILED;
 }
 
-void CPeripheralSteamController::FreePrimitives(unsigned int primitive_count, JOYSTICK_DRIVER_PRIMITIVE* primitives)
-{
-}
-
-PERIPHERAL_ERROR CPeripheralSteamController::SetIgnoredPrimitives(const JOYSTICK_INFO* joystick,
-                                                                  unsigned int primitive_count,
-                                                                  const JOYSTICK_DRIVER_PRIMITIVE* primitives)
+PERIPHERAL_ERROR CPeripheralSteamController::SetIgnoredPrimitives(const kodi::addon::Joystick& joystick,
+                                                                  const std::vector<kodi::addon::DriverPrimitive>& primitives)
 {
   return PERIPHERAL_ERROR_FAILED;
 }
 
-void CPeripheralSteamController::SaveButtonMap(const JOYSTICK_INFO* joystick)
+void CPeripheralSteamController::SaveButtonMap(const kodi::addon::Joystick& joystick)
 {
+
 }
 
-void CPeripheralSteamController::RevertButtonMap(const JOYSTICK_INFO* joystick)
+void CPeripheralSteamController::RevertButtonMap(const kodi::addon::Joystick& joystick)
 {
+
 }
 
-void CPeripheralSteamController::ResetButtonMap(const JOYSTICK_INFO* joystick, const char* controller_id)
+void CPeripheralSteamController::ResetButtonMap(const kodi::addon::Joystick& joystick, const std::string& controller_id)
 {
+
 }
 
 void CPeripheralSteamController::PowerOffJoystick(unsigned int index)

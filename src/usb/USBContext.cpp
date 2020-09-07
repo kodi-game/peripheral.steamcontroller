@@ -11,7 +11,7 @@
 #include "USBThread.h"
 #include "util/Log.h"
 
-#include <kodi/addon-instance/PeripheralUtils.h>
+#include <kodi/addon-instance/peripheral/PeripheralUtils.h>
 
 #include <algorithm>
 #include <libusb.h>

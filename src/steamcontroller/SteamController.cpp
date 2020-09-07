@@ -18,7 +18,7 @@
 #include "usb/USBInterfaceSetting.h"
 #include "usb/USBTransfer.h"
 
-#include <kodi/addon-instance/PeripheralUtils.h>
+#include <kodi/addon-instance/peripheral/PeripheralUtils.h>
 
 #include <algorithm>
 #include <assert.h>
