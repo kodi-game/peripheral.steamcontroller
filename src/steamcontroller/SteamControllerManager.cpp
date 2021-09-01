@@ -1,6 +1,6 @@
 /*
- *  Copyright (C) 2016-2020 Garrett Brown
- *  Copyright (C) 2016-2020 Team Kodi
+ *  Copyright (C) 2016-2021 Garrett Brown
+ *  Copyright (C) 2016-2021 Team Kodi
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSE.md for more information.
