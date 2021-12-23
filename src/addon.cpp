@@ -29,7 +29,7 @@ ADDON_STATUS CPeripheralSteamController::Create()
   }
 #endif
 
-  return GetStatus();
+  return ADDON_STATUS_OK;
 }
 
 CPeripheralSteamController::~CPeripheralSteamController()
@@ -37,12 +37,7 @@ CPeripheralSteamController::~CPeripheralSteamController()
   CSteamControllerManager::Get().Deinitialize();
 }
 
-ADDON_STATUS CPeripheralSteamController::GetStatus()
-{
-  return ADDON_STATUS_OK;
-}
-
-ADDON_STATUS CPeripheralSteamController::SetSetting(const std::string& settingName, const kodi::CSettingValue& settingValue)
+ADDON_STATUS CPeripheralSteamController::SetSetting(const std::string& settingName, const kodi::addon::CSettingValue& settingValue)
 {
   return ADDON_STATUS_OK;
 }
