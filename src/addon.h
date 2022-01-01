@@ -58,7 +58,7 @@
 
 #include <memory>
 
-class ATTRIBUTE_HIDDEN CPeripheralSteamController :
+class ATTR_DLL_LOCAL CPeripheralSteamController :
   public kodi::addon::CAddonBase,
   public kodi::addon::CInstancePeripheral
 {
@@ -67,8 +67,7 @@ public:
   ~CPeripheralSteamController() override;
 
   ADDON_STATUS Create() override;
-  ADDON_STATUS GetStatus() override;
-  ADDON_STATUS SetSetting(const std::string& settingName, const kodi::CSettingValue& settingValue) override;
+  ADDON_STATUS SetSetting(const std::string& settingName, const kodi::addon::CSettingValue& settingValue) override;
 
   void GetCapabilities(kodi::addon::PeripheralCapabilities& capabilities) override;
   PERIPHERAL_ERROR PerformDeviceScan(std::vector<std::shared_ptr<kodi::addon::Peripheral>>& scan_results) override;
