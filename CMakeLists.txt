@@ -57,6 +57,7 @@ set(STEAMCONTROLLER_HEADERS
     src/usb/USBTransfer.h
     src/usb/USBTypes.h
     src/util/Log.h
+    src/addon.h
 )
 
 list(APPEND DEPLIBS
