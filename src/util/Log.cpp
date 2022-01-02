@@ -36,7 +36,7 @@ void CLog::Log(LogLevel level, const char* format, ...)
   vsnprintf(buffer, sizeof(buffer) - 1, format, args);
   va_end(args);
 
-  AddonLog addonLevel = ADDON_LOG_DEBUG;
+  ADDON_LOG addonLevel = ADDON_LOG_DEBUG;
 
   switch (level)
   {
