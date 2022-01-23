@@ -35,11 +35,14 @@ CUSBThread::~CUSBThread()
 void CUSBThread::Deinitialize()
 {
   m_isStopped = true;
-  if (m_thread->joinable())
-    m_thread->join();
+  if (m_thread)
+  {
+    if (m_thread->joinable())
+      m_thread->join();
 
-  delete m_thread;
-  m_thread = nullptr;
+    delete m_thread;
+    m_thread = nullptr;
+  }
 }
 
 void CUSBThread::RegisterDeviceHandle(CUSBDeviceHandle* deviceHandle)
