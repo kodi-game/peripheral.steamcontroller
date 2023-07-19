@@ -14,7 +14,6 @@ ExternalProject_Add(
                             --with-pic
                             --disable-examples-build
                             --disable-tests-build
-                            --with-pic
     INSTALL_COMMAND     ""
     BUILD_IN_SOURCE     1
 )
